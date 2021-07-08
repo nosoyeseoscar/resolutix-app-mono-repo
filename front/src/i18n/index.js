@@ -1,7 +1,7 @@
 export default {
-    TOGGABLE: {
-        CANCEL_BUTTON: 'Cancel'
-    }
+  TOGGABLE: {
+    CANCEL_BUTTON: 'Cancel'
+  }
 }
 
-//forma de manejar traducciones
+// forma de manejar traducciones

@@ -17,7 +17,6 @@ const ERRROR_HANDLERS = {
     res.status(500).end()
 }
 
-
 module.exports = (error, request, response, next) => {
   console.log(error)
   const handler = ERRROR_HANDLERS[error.name] || ERRROR_HANDLERS.defaultError
