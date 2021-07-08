@@ -1,0 +1,38 @@
+{
+  "name": "resolutix-app",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "workspaces": [
+    "back",
+    "front"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run build --workspace=front",
+    "start": "npm run start --workspace=back",
+    "dev:back": "npm run build && npm run dev --workspace=back"
+  },
+  "eslintConfig": {
+    "ignorePatterns": "build",
+    "extends": [
+      "react-app",
+      "react-app/jest",
+      "./node_modules/standard/eslintrc.json"
+    ],
+    "env": {
+      "jest": true,
+      "cypress/globals": true
+    },
+    "plugins": [
+      "cypress"
+    ]
+  },
+  "devDependencies": {
+    "eslint-plugin-cypress": "2.11.3",
+    "standard": "16.0.3"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
