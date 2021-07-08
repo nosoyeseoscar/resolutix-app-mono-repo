@@ -7,9 +7,12 @@
     "back",
     "front"
   ],
+  "engines": {
+    "npm": "7.9.0"
+  },
   "main": "index.js",
   "scripts": {
-    "build": "npm run build --workspace=front",
+    "build": "SKIP_PREFLIGHT_CHECK=true npm run build --workspace=front",
     "start": "npm run start --workspace=back",
     "dev:back": "npm run build && npm run dev --workspace=back"
   },
