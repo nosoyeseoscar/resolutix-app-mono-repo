@@ -1,97 +1,43 @@
-import './App.css'
+import React, { useState } from 'react'
 
-// components
-import DocumentList from './components/documentList'
-import LoginForm from './components/LoginForm'
-import SearchDocto from './components/SearchDocto'
-import DoctoForm from './components/formDocto'
-import Notification from './components/Notification'
+const Home = () => <h1>Home Page</h1>
 
-// import axios from 'axios'
-import doctoService from './services/doctos'
-import loginService from './services/login'
+const Notes = () => <h1>Notes</h1>
 
-/* Hooks */
-import { useState, useEffect } from 'react'
+const Users = () => <h1>Users</h1>
 
-function App () {
-  const [doctos, setDoctos] = useState([])
-  // const [search, SetSearch] = useState([])
+const inLineStyles = {
+  padding: 5
+}
 
-  const [errorMessage, setErrorMessage] = useState(null)
+const App = () => {
+  const [page, setPages] = useState(() => {
+    const { pathname } = window.location
+    const page = pathname.slice(1)
+    return page
+  })
 
-  /* const [userName, setUsername] = useState('')
-  const [password, setPassword] = useState('') */
-  const [user, setUser] = useState(null)
-
-  // useEffect para recuperar todos los doctos.
-  useEffect(() => {
-    doctoService.getAll().then(initialDoctos => { setDoctos(initialDoctos) })
-  }, [])
-
-  useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedDoctoAppUser')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      setUser(user)
-      doctoService.setToken(user.token)
-    }
-  }, [])
-
-  const handleLogout = () => {
-    setUser(null)
-    doctoService.setToken(user.token)
-    window.localStorage.removeItem('loggedDoctoAppUser')
+  const getContent = () => {
+    if (page === 'users') { return <Users /> } else if (page === 'notes') {
+      return <Notes />
+    } else { return <Home /> }
   }
 
-  /*  const handleInputChange = (event) => {
-    SetSearch(event.target.value)
-  } */
+  const toPage = page => event => {
+    event.preventDefault()
 
-  const addDocto = (doctoObject) => {
-    doctoService
-      .create(doctoObject)
-      .then(returnedDocto => {
-        setDoctos(doctos.concat(returnedDocto))
-      })
-  }
-
-  const handleLogin = async (userName, password) => {
-    try {
-      const currentUser = await loginService.login({
-        userName,
-        password
-      })
-
-      window.localStorage.setItem(
-        'loggedDoctoAppUser', JSON.stringify(currentUser)
-      )
-
-      doctoService.setToken(currentUser.token)
-
-      setUser(currentUser)
-    } catch (error) {
-      setErrorMessage('Wrong credentials')
-      setTimeout(() => {
-        setErrorMessage(null)
-      }, 5000)
-    }
+    window.history.pushState(null, '', `/${page}`)
+    setPages(page)
   }
 
   return (
-    <div className='App'>
-      <h1>Oficios Delegacion BCS</h1>
-
-      <Notification message={errorMessage} />
-      <SearchDocto />
-      <hr />
-      {
-        user
-          ? <DoctoForm addDocto={addDocto} logoutUser={handleLogout} />
-          : <LoginForm handleLogin={handleLogin} />
-      }
-
-      <DocumentList docs={doctos} />
+    <div>
+      <header>
+        <a href='#' onClick={toPage('home')} style={inLineStyles}>Home</a>
+        <a href='#' onClick={toPage('notes')} style={inLineStyles}>Notes</a>
+        <a href='#' onClick={toPage('users')} style={inLineStyles}>Users</a>
+      </header>
+      {getContent()}
     </div>
   )
 }

@@ -12,9 +12,10 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "SKIP_PREFLIGHT_CHECK=true npm run build --workspace=front",
+    "build": "cross-env SKIP_PREFLIGHT_CHECK=true npm run build --workspace=front",
     "lint": "eslint ./front ./back",
     "start": "npm run start --workspace=back",
+    "dev:front": "cross-env SKIP_PREFLIGHT_CHECK=true npm start --workspace=front",
     "dev:back": "npm run build && npm run dev --workspace=back"
   },
   "eslintConfig": {
