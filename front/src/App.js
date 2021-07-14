@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { Link, BrowserRouter, Route, Switch } from 'react-router-dom'
+import Doctos from './Doctos'
 
 const Home = () => <h1>Home Page</h1>
-
-const Notes = () => <h1>Notes</h1>
 
 const Users = () => <h1>Users</h1>
 
@@ -11,34 +11,25 @@ const inLineStyles = {
 }
 
 const App = () => {
-  const [page, setPages] = useState(() => {
-    const { pathname } = window.location
-    const page = pathname.slice(1)
-    return page
-  })
-
-  const getContent = () => {
-    if (page === 'users') { return <Users /> } else if (page === 'notes') {
-      return <Notes />
-    } else { return <Home /> }
-  }
-
-  const toPage = page => event => {
-    event.preventDefault()
-
-    window.history.pushState(null, '', `/${page}`)
-    setPages(page)
-  }
-
   return (
-    <div>
+    <BrowserRouter>
       <header>
-        <a href='#' onClick={toPage('home')} style={inLineStyles}>Home</a>
-        <a href='#' onClick={toPage('notes')} style={inLineStyles}>Notes</a>
-        <a href='#' onClick={toPage('users')} style={inLineStyles}>Users</a>
+        <Link to='/' style={inLineStyles}>Home</Link>
+        <Link to='doctos' style={inLineStyles}>Doctos</Link>
+        <Link to='users' style={inLineStyles}>Users</Link>
       </header>
-      {getContent()}
-    </div>
+      <Switch>
+        <Route path='/doctos'>
+          <Doctos />
+        </Route>
+        <Route path='/users'>
+          <Users />
+        </Route>
+        <Route path='/'>
+          <Home />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   )
 }
 
