@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, BrowserRouter, Route, Switch } from 'react-router-dom'
+import { DoctoDetail } from './components/DoctoDetail'
 import Doctos from './Doctos'
+import doctoService from './services/doctos'
 
 const Home = () => <h1>Home Page</h1>
 
@@ -11,14 +13,22 @@ const inLineStyles = {
 }
 
 const App = () => {
+  const [doctos, setDoctos] = useState([])
+  useEffect(() => {
+    doctoService.getAll().then(initialDoctos => { setDoctos(initialDoctos) })
+  }, [])
+
   return (
     <BrowserRouter>
       <header>
         <Link to='/' style={inLineStyles}>Home</Link>
-        <Link to='doctos' style={inLineStyles}>Doctos</Link>
-        <Link to='users' style={inLineStyles}>Users</Link>
+        <Link to='/doctos' style={inLineStyles}>Doctos</Link>
+        <Link to='/users' style={inLineStyles}>Users</Link>
       </header>
       <Switch>
+        <Route path='/doctos/:doctoId'>
+          <DoctoDetail doctos={doctos} />
+        </Route>
         <Route path='/doctos'>
           <Doctos />
         </Route>
