@@ -1,36 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link, BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import { DoctoDetail } from './components/DoctoDetail'
+// Components
 import Doctos from './Doctos'
-import doctoService from './services/doctos'
 import Login from './Login'
+// Hooks
+import { useUser } from './hooks/useUser'
+import { useDoctos } from './hooks/useDoctos'
 
 const Home = () => <h1>Home Page</h1>
 
 const Users = () => <h1>Users</h1>
-
-// const Login = () => <h1>Login</h1>
 
 const inLineStyles = {
   padding: 5
 }
 
 const App = () => {
-  const [doctos, setDoctos] = useState([])
-  const [user, setUser] = useState(null)
-
-  useEffect(() => {
-    doctoService.getAll().then(initialDoctos => { setDoctos(initialDoctos) })
-  }, [])
-
-  useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedDoctoAppUser')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      setUser(user)
-      doctoService.setToken(user.token)
-    }
-  }, [])
+  const { doctos } = useDoctos()
+  const { user } = useUser()
 
   return (
     <BrowserRouter>
