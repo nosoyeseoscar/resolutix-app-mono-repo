@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, BrowserRouter, Route, Switch } from 'react-router-dom'
+import { Link, BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import { DoctoDetail } from './components/DoctoDetail'
 import Doctos from './Doctos'
 import doctoService from './services/doctos'
@@ -54,9 +54,11 @@ const App = () => {
         <Route path='/users'>
           <Users />
         </Route>
-        <Route path='/login'>
-          <Login />
-        </Route>
+        <Route
+          path='/login' render={() => {
+            return <Redirect to='/' /> ? null : <Login />
+          }}
+        />
         <Route path='/'>
           <Home />
         </Route>
