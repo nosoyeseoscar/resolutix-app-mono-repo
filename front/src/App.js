@@ -17,8 +17,19 @@ const inLineStyles = {
 
 const App = () => {
   const [doctos, setDoctos] = useState([])
+  const [user, setUser] = useState(null)
+
   useEffect(() => {
     doctoService.getAll().then(initialDoctos => { setDoctos(initialDoctos) })
+  }, [])
+
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedDoctoAppUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      doctoService.setToken(user.token)
+    }
   }, [])
 
   return (
@@ -27,7 +38,11 @@ const App = () => {
         <Link to='/' style={inLineStyles}>Home</Link>
         <Link to='/doctos' style={inLineStyles}>Doctos</Link>
         <Link to='/users' style={inLineStyles}>Users</Link>
-        <Link to='/login' style={inLineStyles}>Login</Link>
+        {
+          user
+            ? <em>Logged as {user.name}</em>
+            : <Link to='/login' style={inLineStyles}>Login</Link>
+        }
       </header>
       <Switch>
         <Route path='/doctos/:doctoId'>

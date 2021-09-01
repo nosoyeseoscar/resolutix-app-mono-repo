@@ -4,7 +4,7 @@ import './App.css'
 import DocumentList from './components/documentList'
 // import LoginForm from './components/LoginForm'
 import SearchDocto from './components/SearchDocto'
-// import DoctoForm from './components/formDocto'
+import DoctoForm from './components/formDocto'
 import Notification from './components/Notification'
 
 // import axios from 'axios'
@@ -18,7 +18,7 @@ function App () {
   const [doctos, setDoctos] = useState([])
   // const [search, SetSearch] = useState([])
 
-  const [errorMessage, setErrorMessage] = useState(null)
+  // const [errorMessage, setErrorMessage] = useState(null)
 
   /* const [userName, setUsername] = useState('')
   const [password, setPassword] = useState('') */
@@ -38,38 +38,35 @@ function App () {
     }
   }, [])
 
-  /* const handleLogout = () => {
+  const handleLogout = () => {
     setUser(null)
-    doctoService.setToken(user.token)
+    doctoService.setToken(null)
     window.localStorage.removeItem('loggedDoctoAppUser')
-  } */
+  }
 
   /*  const handleInputChange = (event) => {
     SetSearch(event.target.value)
   } */
 
-  /* const addDocto = (doctoObject) => {
+  const addDocto = (doctoObject) => {
     doctoService
       .create(doctoObject)
       .then(returnedDocto => {
         setDoctos(doctos.concat(returnedDocto))
       })
-  } */
+  }
 
   return (
     <div className='App'>
       <h1>Oficios Delegacion BCS</h1>
 
-      <Notification message={errorMessage} />
+      <Notification message='' />
       <SearchDocto />
-
-      {/* <hr />
       {
         user
           ? <DoctoForm addDocto={addDocto} logoutUser={handleLogout} />
-          : <LoginForm handleLogin={handleLogin} />
-      } */}
-
+          : <h2> User not logged</h2>
+      }
       <DocumentList docs={doctos} />
     </div>
   )

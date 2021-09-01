@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useHistory } from 'react-router'
 
 // Components
 import LoginForm from './components/LoginForm'
@@ -8,6 +9,7 @@ import loginService from './services/login'
 import doctoService from './services/doctos'
 
 export default function Login () {
+  const history = useHistory()
   const [userName, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
@@ -30,6 +32,9 @@ export default function Login () {
       setUser(user)
       setUsername('')
       setPassword('')
+
+      // go to home when login
+      history.push('/doctos')
     } catch (error) {
       console.log(JSON.stringify(error))
       setErrorMessage('Wrong credentials')
@@ -40,6 +45,8 @@ export default function Login () {
   }
 
   if (errorMessage) return <p>{errorMessage}</p> // Return Only Error Message
+
+  if (user) return <p>User is logged!!</p> // Return Only when user is logged.
 
   return (
     <LoginForm
