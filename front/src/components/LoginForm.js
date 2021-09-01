@@ -1,24 +1,38 @@
 import { PropTypes } from 'prop-types'
+import { useState } from 'react'
+
+const useField = ({ type }) => {
+  const [value, setValue] = useState()
+
+  const onChange = event => {
+    setValue(event.target.value)
+  }
+
+  return {
+    type,
+    value,
+    onChange
+  }
+}
 
 export default function LoginForm ({ handleSubmit, ...props }) {
+  const username = useField({ type: 'text' })
+  const password = useField({ type: 'password' })
+
   return (
     <form onSubmit={handleSubmit}>
       <div>
         <input
-          type='text'
-          value={props.username}
+          {...username}
           name='Username'
           placeholder='Username'
-          onChange={props.handleUsernameChange}
         />
       </div>
       <div>
         <input
-          type='password'
-          value={props.password}
+          {...password}
           name='Password'
           placeholder='Password'
-          onChange={props.handlePasswordChange}
         />
       </div>
       <button id='form-login-button'>Login</button>
