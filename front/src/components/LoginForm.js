@@ -1,46 +1,29 @@
-import { useState } from 'react'
-import Togglable from './Toggable'
 import { PropTypes } from 'prop-types'
 
-export default function LoginForm ({ handleLogin }) {
-  const [userName, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-
-  const handleUsernameChange = ({ target }) => setUsername(target.value)
-  const handlePasswordChange = ({ target }) => setPassword(target.value)
-
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    handleLogin(userName, password)
-    setUsername('')
-    setPassword('')
-  }
-
+export default function LoginForm ({ handleSubmit, ...props }) {
   return (
-    <Togglable buttonLabel='Show Login'>
-      <h2>Login User</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input
-            type='text'
-            value={userName}
-            name='Username'
-            placeholder='Username'
-            onChange={handleUsernameChange}
-          />
-        </div>
-        <div>
-          <input
-            type='password'
-            value={password}
-            name='Password'
-            placeholder='Password'
-            onChange={handlePasswordChange}
-          />
-        </div>
-        <button id='form-login-button'>Login</button>
-      </form>
-    </Togglable>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <input
+          type='text'
+          value={props.username}
+          name='Username'
+          placeholder='Username'
+          onChange={props.handleUsernameChange}
+        />
+      </div>
+      <div>
+        <input
+          type='password'
+          value={props.password}
+          name='Password'
+          placeholder='Password'
+          onChange={props.handlePasswordChange}
+        />
+      </div>
+      <button id='form-login-button'>Login</button>
+    </form>
+
   )
 }
 

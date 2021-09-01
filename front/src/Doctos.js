@@ -2,14 +2,14 @@ import './App.css'
 
 // components
 import DocumentList from './components/documentList'
-import LoginForm from './components/LoginForm'
+// import LoginForm from './components/LoginForm'
 import SearchDocto from './components/SearchDocto'
-import DoctoForm from './components/formDocto'
+// import DoctoForm from './components/formDocto'
 import Notification from './components/Notification'
 
 // import axios from 'axios'
 import doctoService from './services/doctos'
-import loginService from './services/login'
+// import loginService from './services/login'
 
 /* Hooks */
 import { useState, useEffect } from 'react'
@@ -38,45 +38,23 @@ function App () {
     }
   }, [])
 
-  const handleLogout = () => {
+  /* const handleLogout = () => {
     setUser(null)
     doctoService.setToken(user.token)
     window.localStorage.removeItem('loggedDoctoAppUser')
-  }
+  } */
 
   /*  const handleInputChange = (event) => {
     SetSearch(event.target.value)
   } */
 
-  const addDocto = (doctoObject) => {
+  /* const addDocto = (doctoObject) => {
     doctoService
       .create(doctoObject)
       .then(returnedDocto => {
         setDoctos(doctos.concat(returnedDocto))
       })
-  }
-
-  const handleLogin = async (userName, password) => {
-    try {
-      const currentUser = await loginService.login({
-        userName,
-        password
-      })
-
-      window.localStorage.setItem(
-        'loggedDoctoAppUser', JSON.stringify(currentUser)
-      )
-
-      doctoService.setToken(currentUser.token)
-
-      setUser(currentUser)
-    } catch (error) {
-      setErrorMessage('Wrong credentials')
-      setTimeout(() => {
-        setErrorMessage(null)
-      }, 5000)
-    }
-  }
+  } */
 
   return (
     <div className='App'>
@@ -84,12 +62,13 @@ function App () {
 
       <Notification message={errorMessage} />
       <SearchDocto />
-      <hr />
+
+      {/* <hr />
       {
         user
           ? <DoctoForm addDocto={addDocto} logoutUser={handleLogout} />
           : <LoginForm handleLogin={handleLogin} />
-      }
+      } */}
 
       <DocumentList docs={doctos} />
     </div>
