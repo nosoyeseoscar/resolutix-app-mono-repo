@@ -1,11 +1,12 @@
 // Componente que pinta la lista de oficios.
 import Doc from './doc'
+import Table from 'react-bootstrap/Table'
 
 const DocumentList = ({ docs }) => {
   return (
     <div>
       <h2>Oficios</h2>
-      <table>
+      <Table striped>
         <tbody>
           <tr>
             <th>No. Oficio</th>
@@ -16,7 +17,7 @@ const DocumentList = ({ docs }) => {
             <Doc key={doc.id} doc={doc} />
           ))}
         </tbody>
-      </table>
+      </Table>
     </div>
   )
 }

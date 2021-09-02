@@ -5,12 +5,13 @@ const Doc = ({ doc }) => {
   const { id, numOf, promovente, tipo } = doc
   return (
     <tr>
-      <Link to={`/doctos/${id}`}>
-        <td>{numOf}</td>
-        <td>{promovente}</td>
-        <td>{tipo}</td>
-
-      </Link>
+      <td>
+        <Link to={`/doctos/${id}`}>
+          {numOf}
+        </Link>
+      </td>
+      <td>{promovente}</td>
+      <td>{tipo}</td>
     </tr>
   )
 }

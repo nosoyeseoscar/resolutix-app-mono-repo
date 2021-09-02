@@ -1,5 +1,6 @@
 import { PropTypes } from 'prop-types'
 import { useState } from 'react'
+import { Button, Form } from 'react-bootstrap'
 
 const useField = ({ type }) => {
   const [value, setValue] = useState()
@@ -20,26 +21,45 @@ export default function LoginForm ({ handleSubmit, ...props }) {
   const password = useField({ type: 'password' })
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <Form onSubmit={handleSubmit}>
+      <Form.Group id='username'>
+        <Form.Control
+          {...username}
+          name='Username'
+          placeholder='Username'
+          onChange={props.handleUsernameChange}
+        />
+      </Form.Group>
+      <Form.Group id='password'>
+        <Form.Control
+          {...password}
+          name='Password'
+          placeholder='Password'
+          onChange={props.handlePasswordChange}
+        />
+      </Form.Group>
+      <Button type='submit' id='form-login-button'>Login</Button>
+    </Form>
+  )
+}
+
+/* <form onSubmit={handleSubmit}>
+      <div id='username'>
         <input
           {...username}
           name='Username'
           placeholder='Username'
         />
       </div>
-      <div>
+      <div id='password'>
         <input
           {...password}
           name='Password'
           placeholder='Password'
         />
       </div>
-      <button id='form-login-button'>Login</button>
-    </form>
-
-  )
-}
+      <button type='submit' id='form-login-button'>Login</button>
+    </form> */
 
 LoginForm.propTypes = {
   handleLogin: PropTypes.func

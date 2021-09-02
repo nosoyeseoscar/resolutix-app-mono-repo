@@ -7,6 +7,8 @@ import Login from './Login'
 // Hooks
 import { useUser } from './hooks/useUser'
 import { useDoctos } from './hooks/useDoctos'
+// Bootstrap Components
+import { Nav, Navbar } from 'react-bootstrap'
 
 const Home = () => <h1>Home Page</h1>
 
@@ -22,35 +24,50 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <header>
-        <Link to='/' style={inLineStyles}>Home</Link>
-        <Link to='/doctos' style={inLineStyles}>Doctos</Link>
-        <Link to='/users' style={inLineStyles}>Users</Link>
-        {
-          user
-            ? <em>Logged as {user.name}</em>
-            : <Link to='/login' style={inLineStyles}>Login</Link>
-        }
-      </header>
-      <Switch>
-        <Route path='/doctos/:doctoId'>
-          <DoctoDetail doctos={doctos} />
-        </Route>
-        <Route path='/doctos'>
-          <Doctos />
-        </Route>
-        <Route path='/users'>
-          <Users />
-        </Route>
-        <Route
-          path='/login' render={() => {
-            return <Redirect to='/' /> ? null : <Login />
-          }}
-        />
-        <Route path='/'>
-          <Home />
-        </Route>
-      </Switch>
+      <div className='container'>
+        <Navbar collapseOnSelect expand='lg'>
+          <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+          <Navbar.Collapse>
+            <Nav>
+              <Nav.Link>
+                <Link to='/' style={inLineStyles}>Home</Link>
+              </Nav.Link>
+              <Nav.Link>
+                <Link to='/doctos' style={inLineStyles}>Doctos</Link>
+              </Nav.Link>
+              <Nav.Link>
+                <Link to='/users' style={inLineStyles}>Users</Link>
+              </Nav.Link>
+              <Nav.Link>
+                {
+                    user
+                      ? <em>Logged as {user.name}</em>
+                      : (<Link to='/login' style={inLineStyles}>Login</Link>)
+                }
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+        <Switch>
+          <Route path='/doctos/:doctoId'>
+            <DoctoDetail doctos={doctos} />
+          </Route>
+          <Route path='/doctos'>
+            <Doctos />
+          </Route>
+          <Route path='/users'>
+            <Users />
+          </Route>
+          <Route
+            path='/login' render={() => {
+              return user ? <Redirect to='/' /> : <Login />
+            }}
+          />
+          <Route path='/'>
+            <Home />
+          </Route>
+        </Switch>
+      </div>
     </BrowserRouter>
   )
 }

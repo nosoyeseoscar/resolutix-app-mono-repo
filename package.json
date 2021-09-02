@@ -40,8 +40,5 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "bootstrap": "^5.1.0",
-    "react-bootstrap": "^2.0.0-beta.6"
-  }
+  "dependencies": {}
 }

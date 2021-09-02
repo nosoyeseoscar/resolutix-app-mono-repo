@@ -16,6 +16,7 @@ export default function Login () {
   const [errorMessage, setErrorMessage] = useState(null)
 
   const handleLogin = async (event) => {
+    console.log('el usuario es: ' + userName)
     event.preventDefault()
     try {
       const user = await loginService.login({
@@ -28,7 +29,6 @@ export default function Login () {
       )
 
       doctoService.setToken(user.token)
-
       setUser(user)
       setUsername('')
       setPassword('')
@@ -36,7 +36,7 @@ export default function Login () {
       // go to home when login
       history.push('/doctos')
     } catch (error) {
-      console.log(JSON.stringify(error))
+      // console.log(JSON.stringify(error))
       setErrorMessage('Wrong credentials')
       setTimeout(() => {
         setErrorMessage(null)
