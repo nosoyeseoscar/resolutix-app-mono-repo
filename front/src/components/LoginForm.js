@@ -26,6 +26,7 @@ export default function LoginForm ({ handleSubmit, ...props }) {
           {...username}
           name='Username'
           placeholder='Username'
+          onChange={props.handleUsernameChange}
         />
       </div>
       <div>
@@ -33,6 +34,7 @@ export default function LoginForm ({ handleSubmit, ...props }) {
           {...password}
           name='Password'
           placeholder='Password'
+          onChange={props.handlePasswordChange}
         />
       </div>
       <button id='form-login-button'>Login</button>
