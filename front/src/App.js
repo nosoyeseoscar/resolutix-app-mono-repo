@@ -44,7 +44,7 @@ const App = () => {
         </Route>
         <Route
           path='/login' render={() => {
-            return <Redirect to='/' /> ? null : <Login />
+            return user ? <Redirect to='/' /> : <Login />
           }}
         />
         <Route path='/'>
