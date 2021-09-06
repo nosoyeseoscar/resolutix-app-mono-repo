@@ -7,10 +7,10 @@ const Doc = ({ doc }) => {
     <tr>
       <Link to={`/doctos/${id}`}>
         <td>{numOf}</td>
-        <td>{promovente}</td>
-        <td>{tipo}</td>
-
       </Link>
+      <td>{promovente}</td>
+      <td>{tipo}</td>
+
     </tr>
   )
 }
