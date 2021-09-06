@@ -1,22 +1,31 @@
 // Componente que pinta la lista de oficios.
+import { TableBody, Table, TableContainer, TableRow, TableCell } from '@material-ui/core'
 import Doc from './doc'
 
 const DocumentList = ({ docs }) => {
   return (
     <div>
       <h2>Oficios</h2>
-      <table>
-        <tbody>
-          <tr>
-            <th>No. Oficio</th>
-            <th>Promovente</th>
-            <th>Tipo</th>
-          </tr>
-          {docs.map((doc) => (
-            <Doc key={doc.id} doc={doc} />
-          ))}
-        </tbody>
-      </table>
+      <TableContainer>
+        <Table>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                No. Oficio
+              </TableCell>
+              <TableCell>
+                Promovente
+              </TableCell>
+              <TableCell>
+                Tipo
+              </TableCell>
+            </TableRow>
+            {docs.map((doc) => (
+              <Doc key={doc.id} doc={doc} />
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   )
 }

@@ -1,5 +1,7 @@
 import { PropTypes } from 'prop-types'
 import { useState } from 'react'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
 
 const useField = ({ type }) => {
   const [value, setValue] = useState()
@@ -22,22 +24,26 @@ export default function LoginForm ({ handleSubmit, ...props }) {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <input
+        <TextField
           {...username}
           name='Username'
           placeholder='Username'
           onChange={props.handleUsernameChange}
+          label='User Name'
+          variant='outlined'
         />
       </div>
       <div>
-        <input
+        <TextField
           {...password}
           name='Password'
           placeholder='Password'
           onChange={props.handlePasswordChange}
+          label='Password'
+          variant='outlined'
         />
       </div>
-      <button id='form-login-button'>Login</button>
+      <Button color='primary' variant='contained' id='form-login-button'>Login</Button>
     </form>
 
   )
