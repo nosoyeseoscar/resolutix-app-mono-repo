@@ -1,5 +1,6 @@
 import { PropTypes } from 'prop-types'
 import { useState } from 'react'
+import { Button } from './Button'
 
 const useField = ({ type }) => {
   const [value, setValue] = useState()
@@ -35,7 +36,7 @@ export default function LoginForm ({ handleSubmit, ...props }) {
           placeholder='Password'
         />
       </div>
-      <button id='form-login-button'>Login</button>
+      <Button id='form-login-button'>Login</Button>
     </form>
 
   )

@@ -4,6 +4,8 @@ import { DoctoDetail } from './components/DoctoDetail'
 // Components
 import Doctos from './Doctos'
 import Login from './Login'
+import { StyledLink } from './components/StyledLink'
+
 // Hooks
 import { useUser } from './hooks/useUser'
 import { useDoctos } from './hooks/useDoctos'
@@ -23,13 +25,13 @@ const App = () => {
   return (
     <BrowserRouter>
       <header>
-        <Link to='/' style={inLineStyles}>Home</Link>
-        <Link to='/doctos' style={inLineStyles}>Doctos</Link>
-        <Link to='/users' style={inLineStyles}>Users</Link>
+        <StyledLink to='/' style={inLineStyles}>Home</StyledLink>
+        <StyledLink to='/doctos' style={inLineStyles}>Doctos</StyledLink>
+        <StyledLink to='/users' style={inLineStyles}>Users</StyledLink>
         {
           user
             ? <em>Logged as {user.name}</em>
-            : <Link to='/login' style={inLineStyles}>Login</Link>
+            : <StyledLink to='/login' style={inLineStyles}>Login</StyledLink>
         }
       </header>
       <Switch>
